@@ -1,0 +1,128 @@
+{
+    "compatibilities": [
+        "EC2",
+        "MANAGED_INSTANCES",
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "command": [
+                "sh",
+                "-lc",
+                "mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri \"postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}\" --default-artifact-root \"$ARTIFACT_ROOT\""
+            ],
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "DB_NAME",
+                    "value": "mlflowdb"
+                },
+                {
+                    "name": "ARTIFACT_ROOT",
+                    "value": "s3://mlops-practice-mlflow-artifacts-prod"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "mlflowdb.cluster-c654g2qwihjr.us-east-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "DB_USER",
+                    "value": "mlflow_user"
+                }
+            ],
+            "essential": true,
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "bash -c '</dev/tcp/127.0.0.1/5000' || exit 1"
+                ],
+                "interval": 30,
+                "retries": 3,
+                "startPeriod": 20,
+                "timeout": 5
+            },
+            "image": "481181974576.dkr.ecr.us-east-1.amazonaws.com/mlflow-ecr:b5c1251",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/mlflow-tracking",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "mlflow"
+                }
+            },
+            "mountPoints": [],
+            "name": "mlflow",
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "protocol": "tcp"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:481181974576:secret:rds!cluster-5ea7b8ac-1897-4fc0-9d73-42f0dd6ae973-48saOK:password::"
+                }
+            ],
+            "systemControls": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "1024",
+    "executionRoleArn": "arn:aws:iam::481181974576:role/ecsTaskExecutionRole",
+    "family": "mlflow-tracking-server",
+    "memory": "3072",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-10-01T05:16:40.847Z",
+    "registeredBy": "arn:aws:iam::481181974576:root",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.secrets.asm.environment-variables"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.container-health-check"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 1,
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:481181974576:task-definition/mlflow-tracking-server:1",
+    "taskRoleArn": "arn:aws:iam::481181974576:role/mlflowTaskRole",
+    "volumes": [],
+    "tags": []
+}
