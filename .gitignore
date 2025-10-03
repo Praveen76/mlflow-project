@@ -8,7 +8,7 @@ __pycache__/
 
 ### files
 aws_ecs_task_definition.json
-
+./docs/*.pdf
 
 
 # Distribution / packaging
