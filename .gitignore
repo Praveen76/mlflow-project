@@ -10,6 +10,8 @@ __pycache__/
 aws_ecs_task_definition.json
 ./docs/*.pdf
 
+#
+abc.txt
 
 # Distribution / packaging
 .Python
