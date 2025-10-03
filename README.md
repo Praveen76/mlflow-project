@@ -1,5 +1,14 @@
 
 
+## 0) Create venv
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -U mlflow scikit-learn
+python train.py
+mlflow ui --backend-store-uri file:./mlruns
+
+```
 
 ## 1) Log in to ECR (use command substitution to avoid the TTY error)
 

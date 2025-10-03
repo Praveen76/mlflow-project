@@ -1,0 +1,10 @@
+artifact_location: file:///Users/praveen/Personal/SummerInternship/MLOPS_Practice/mlflow-project/mlruns/222302529585648491/models/m-19e77a2842364dcf87ebac6dbc48f196/artifacts
+creation_timestamp: 1759452653913
+experiment_id: '222302529585648491'
+last_updated_timestamp: 1759452657492
+model_id: m-19e77a2842364dcf87ebac6dbc48f196
+model_type: null
+name: trained_model
+source_run_id: 14ef53ba68c248588db519973775b5d4
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/praveen/Personal/SummerInternship/MLOPS_Practice/mlflow-project/mlruns/222302529585648491/a18c26596eae40b1b29d91b38c34f80d/artifacts
+end_time: 1759453053333
+entry_point_name: ''
+experiment_id: '222302529585648491'
+lifecycle_stage: active
+run_id: a18c26596eae40b1b29d91b38c34f80d
+run_name: run-01
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759453050947
+status: 3
+tags: []
+user_id: praveen
