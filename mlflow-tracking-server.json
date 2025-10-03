@@ -19,7 +19,7 @@
                 },
                 {
                     "name": "DB_NAME",
-                    "value": "mlflowdb"
+                    "value": "postgres"
                 },
                 {
                     "name": "ARTIFACT_ROOT",
